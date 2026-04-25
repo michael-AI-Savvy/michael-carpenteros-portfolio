@@ -1,4 +1,20 @@
-import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, Maximize2 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import projectAiChatbot from "@/assets/project-ai-chatbot.png";
+import projectUpwork from "@/assets/project-upwork.png";
+import projectAutoDm from "@/assets/project-auto-dm.jpg";
+import projectN8nSamples from "@/assets/project-n8n-samples.png";
+import projectFinalOutput from "@/assets/project-final-output.png";
+import projectGenerator from "@/assets/project-generator.png";
+import projectCeipalAts from "@/assets/project-ceipal-ats.png";
+import projectCeipalCombine from "@/assets/project-ceipal-combine.png";
 
 const projects = [
   {
@@ -6,52 +22,62 @@ const projects = [
     category: "AI Chatbot",
     desc: "Built intelligent n8n webhook-triggered chatbot using Google Gemini AI for automated document analysis and instant HTTP responses with conditional logic.",
     tags: ["n8n", "Google Gemini", "Webhooks", "Document AI"],
+    image: projectAiChatbot,
   },
   {
     title: "Project Management Integration Hub",
     category: "Process Automation",
     desc: "Seamless Make.com workflow connecting Asana task management with Xero accounting and Google Sheets for real-time project tracking and financial reporting.",
     tags: ["Make.com", "Asana", "Xero", "Google Sheets"],
+    image: projectUpwork,
   },
   {
     title: "ManyChat Auto-DM Funnel",
     category: "Chatbot Marketing",
     desc: "Complex ManyChat automation with conditional branching, personalized messaging sequences, and email integration for lead nurturing and customer engagement.",
     tags: ["ManyChat", "Messenger", "Email", "Lead Nurturing"],
+    image: projectAutoDm,
   },
   {
     title: "Zapier AI Chatbot Assistant",
     category: "AI Chatbot",
     desc: "Intelligent Zapier workflow integrating Facebook Messenger with ChatGPT and Google Docs for context-aware automated responses and document conversations.",
     tags: ["Zapier", "ChatGPT", "Messenger", "Google Docs"],
+    image: projectFinalOutput,
   },
   {
     title: "AI Agent Document Workflow",
     category: "AI Chatbot",
     desc: "Advanced n8n automation with JavaScript code execution, AI agent orchestration, and Google Gemini integration for intelligent document processing.",
     tags: ["n8n", "AI Agent", "JavaScript", "Gemini"],
+    image: projectN8nSamples,
   },
   {
     title: "Social Media Content Generator",
     category: "Process Automation",
     desc: "Automated n8n workflow for scheduled Facebook and YouTube Reels creation. JWT auth, AI-powered video generation, and multi-platform publishing.",
     tags: ["n8n", "Video AI", "YouTube API", "Social Media"],
+    image: projectGenerator,
   },
   {
     title: "AI Agent with Multi-Model Integration",
     category: "AI Chatbot",
     desc: "Advanced n8n AI agent featuring Google Gemini, OpenAI chat models, structured output parsing, Discord channel creation, and email notifications.",
     tags: ["n8n", "AI Agent", "OpenAI", "Discord"],
+    image: projectCeipalAts,
   },
   {
     title: "Ceipal ATS Data Sync Automation",
     category: "Process Automation",
     desc: "Comprehensive n8n workflow integrating Ceipal ATS with Google Sheets. Scheduled extraction, XML parsing, JS transformations, and duplicate removal.",
     tags: ["n8n", "Ceipal ATS", "Sheets", "JavaScript"],
+    image: projectCeipalCombine,
   },
 ];
 
 export function Projects() {
+  const [selected, setSelected] = useState<(typeof projects)[number] | null>(null);
+
   return (
     <section id="projects" className="relative py-28">
       <div className="mx-auto max-w-7xl px-6">
@@ -68,19 +94,35 @@ export function Projects() {
           </div>
           <p className="max-w-md text-muted-foreground">
             A selection of automation systems, AI agents, and integrations
-            built for real businesses.
+            built for real businesses. Click any card to view the workflow.
           </p>
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {projects.map((p) => (
-            <article
+            <button
               key={p.title}
-              className="group relative overflow-hidden rounded-2xl border border-border card-gradient p-7 transition-all hover:border-primary/50 hover:-translate-y-1"
+              type="button"
+              onClick={() => setSelected(p)}
+              className="group relative overflow-hidden rounded-2xl border border-border card-gradient text-left transition-all hover:border-primary/50 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-primary/10 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-              <div className="relative">
+              <div className="relative aspect-video overflow-hidden border-b border-border/60 bg-background/40">
+                <img
+                  src={p.image}
+                  alt={`${p.title} workflow preview`}
+                  loading="lazy"
+                  className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
+                <div className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-background/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-foreground backdrop-blur-sm opacity-0 transition-opacity group-hover:opacity-100">
+                  <Maximize2 className="h-3 w-3" />
+                  View
+                </div>
+              </div>
+
+              <div className="relative p-7">
                 <div className="flex items-start justify-between gap-4">
                   <span className="rounded-full bg-primary/15 px-3 py-1 font-mono text-xs uppercase tracking-wider text-primary">
                     {p.category}
@@ -106,10 +148,47 @@ export function Projects() {
                   ))}
                 </div>
               </div>
-            </article>
+            </button>
           ))}
         </div>
       </div>
+
+      <Dialog open={!!selected} onOpenChange={(open) => !open && setSelected(null)}>
+        <DialogContent className="max-w-5xl border-border bg-background p-0">
+          {selected && (
+            <>
+              <DialogHeader className="px-6 pt-6">
+                <span className="w-fit rounded-full bg-primary/15 px-3 py-1 font-mono text-xs uppercase tracking-wider text-primary">
+                  {selected.category}
+                </span>
+                <DialogTitle className="mt-3 font-display text-2xl">
+                  {selected.title}
+                </DialogTitle>
+                <DialogDescription className="text-muted-foreground">
+                  {selected.desc}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="overflow-hidden border-t border-border bg-background/40">
+                <img
+                  src={selected.image}
+                  alt={`${selected.title} workflow`}
+                  className="h-auto w-full object-contain"
+                />
+              </div>
+              <div className="flex flex-wrap gap-2 px-6 pb-6">
+                {selected.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-md border border-border/60 bg-background/40 px-2.5 py-1 font-mono text-xs text-muted-foreground"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }

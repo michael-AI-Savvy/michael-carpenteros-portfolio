@@ -15,6 +15,7 @@ import projectFinalOutput from "@/assets/project-final-output.png";
 import projectGenerator from "@/assets/project-generator.png";
 import projectCeipalAts from "@/assets/project-ceipal-ats.png";
 import projectCeipalCombine from "@/assets/project-ceipal-combine.png";
+import projectZapierChatbot from "@/assets/project-zapier-chatbot.png";
 
 const projects = [
   {
@@ -41,9 +42,9 @@ const projects = [
   {
     title: "Zapier AI Chatbot Assistant",
     category: "AI Chatbot",
-    desc: "Intelligent Zapier workflow integrating Facebook Messenger with ChatGPT and Google Docs for context-aware automated responses and document conversations.",
-    tags: ["Zapier", "ChatGPT", "Messenger", "Google Docs"],
-    image: projectFinalOutput,
+    desc: "Multi-path Zapier Zap triggered by new Facebook Messenger messages. Conditional Paths route the conversation, pull contextual content from Google Docs, generate intelligent ChatGPT replies, and send the response back to the user on Messenger.",
+    tags: ["Zapier", "Messenger", "Paths", "ChatGPT", "Google Docs"],
+    image: projectZapierChatbot,
   },
   {
     title: "AI Agent Document Workflow",

@@ -124,14 +124,14 @@ export function Projects() {
               </div>
 
               <div className="relative p-7">
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center justify-between gap-4">
                   <span className="rounded-full bg-primary/15 px-3 py-1 font-mono text-xs uppercase tracking-wider text-primary">
                     {p.category}
                   </span>
-                  <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:text-primary group-hover:rotate-12" />
+                  <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:rotate-12" />
                 </div>
 
-                <h3 className="mt-5 font-display text-2xl font-semibold leading-tight text-foreground">
+                <h3 className="mt-5 font-display text-xl font-semibold leading-snug text-foreground md:text-2xl">
                   {p.title}
                 </h3>
                 <p className="mt-3 leading-relaxed text-muted-foreground">

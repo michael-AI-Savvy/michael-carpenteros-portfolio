@@ -1,14 +1,91 @@
-import { Mail, Github, Linkedin, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { Mail, Github, Linkedin, ArrowRight, Send, Loader2 } from "lucide-react";
+import { z } from "zod";
+import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+
+const contactSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .nonempty({ message: "Name is required" })
+    .max(100, { message: "Name must be less than 100 characters" }),
+  email: z
+    .string()
+    .trim()
+    .email({ message: "Please enter a valid email" })
+    .max(255, { message: "Email must be less than 255 characters" }),
+  subject: z
+    .string()
+    .trim()
+    .nonempty({ message: "Subject is required" })
+    .max(150, { message: "Subject must be less than 150 characters" }),
+  message: z
+    .string()
+    .trim()
+    .nonempty({ message: "Message is required" })
+    .max(1000, { message: "Message must be less than 1000 characters" }),
+});
+
+type FormErrors = Partial<Record<keyof z.infer<typeof contactSchema>, string>>;
 
 export function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleChange = (field: keyof typeof form) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setForm((prev) => ({ ...prev, [field]: e.target.value }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = contactSchema.safeParse(form);
+    if (!result.success) {
+      const fieldErrors: FormErrors = {};
+      result.error.issues.forEach((issue) => {
+        const key = issue.path[0] as keyof FormErrors;
+        if (!fieldErrors[key]) fieldErrors[key] = issue.message;
+      });
+      setErrors(fieldErrors);
+      toast.error("Please fix the errors in the form.");
+      return;
+    }
+
+    setSubmitting(true);
+    // Open user's email client with prefilled content (no backend required)
+    const body = `Name: ${result.data.name}%0D%0AEmail: ${result.data.email}%0D%0A%0D%0A${encodeURIComponent(
+      result.data.message,
+    )}`;
+    const mailto = `mailto:hello@michaelcarpenteros.com?subject=${encodeURIComponent(
+      result.data.subject,
+    )}&body=${body}`;
+
+    try {
+      window.location.href = mailto;
+      toast.success("Opening your email client…", {
+        description: "Your message is ready to send.",
+      });
+      setForm({ name: "", email: "", subject: "", message: "" });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="relative py-28">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-surface/40 p-10 backdrop-blur-md md:p-16">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-surface/40 p-8 backdrop-blur-md md:p-12">
           <div className="absolute inset-0 grid-pattern opacity-40" />
           <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
 
-          <div className="relative grid gap-12 md:grid-cols-2 md:items-center">
+          <div className="relative grid gap-10 lg:grid-cols-2 lg:items-start">
+            {/* Left: Heading + contact links */}
             <div>
               <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5">
                 <span className="font-mono text-xs uppercase tracking-widest text-primary">
@@ -23,69 +100,186 @@ export function Contact() {
                 Open to consulting, freelance projects, and full-time
                 opportunities. Reach out and let's build something that scales.
               </p>
+
+              <div className="mt-8 space-y-3">
+                <a
+                  href="mailto:hello@michaelcarpenteros.com"
+                  className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                      <Mail className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                        Email
+                      </div>
+                      <div className="text-sm font-medium text-foreground">
+                        hello@michaelcarpenteros.com
+                      </div>
+                    </div>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
+                </a>
+
+                <a
+                  href="#"
+                  className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                      <Linkedin className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                        LinkedIn
+                      </div>
+                      <div className="text-sm font-medium text-foreground">
+                        /in/michaelcarpenteros
+                      </div>
+                    </div>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
+                </a>
+
+                <a
+                  href="#"
+                  className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                      <Github className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                        GitHub
+                      </div>
+                      <div className="text-sm font-medium text-foreground">
+                        @mcarpenteros
+                      </div>
+                    </div>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
+                </a>
+              </div>
             </div>
 
-            <div className="space-y-3">
-              <a
-                href="mailto:hello@michaelcarpenteros.com"
-                className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-5 transition-all hover:border-primary/50 hover:bg-primary/5"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                    <Mail className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-xs uppercase tracking-wider text-muted-foreground">
-                      Email
-                    </div>
-                    <div className="font-medium text-foreground">
-                      hello@michaelcarpenteros.com
-                    </div>
-                  </div>
-                </div>
-                <ArrowRight className="h-5 w-5 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
-              </a>
+            {/* Right: Contact form */}
+            <form
+              onSubmit={handleSubmit}
+              noValidate
+              className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur-sm md:p-8"
+            >
+              <div className="mb-6">
+                <h3 className="font-display text-2xl font-semibold text-foreground">
+                  Send a message
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Fill out the form and I'll get back to you within 24 hours.
+                </p>
+              </div>
 
-              <a
-                href="#"
-                className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-5 transition-all hover:border-primary/50 hover:bg-primary/5"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                    <Linkedin className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-xs uppercase tracking-wider text-muted-foreground">
-                      LinkedIn
-                    </div>
-                    <div className="font-medium text-foreground">
-                      /in/michaelcarpenteros
-                    </div>
-                  </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="space-y-1.5">
+                  <Label htmlFor="contact-name" className="text-xs uppercase tracking-wider text-muted-foreground">
+                    Name
+                  </Label>
+                  <Input
+                    id="contact-name"
+                    placeholder="Your full name"
+                    maxLength={100}
+                    value={form.name}
+                    onChange={handleChange("name")}
+                    aria-invalid={!!errors.name}
+                    className="border-border bg-background/40"
+                  />
+                  {errors.name && (
+                    <p className="text-xs text-destructive">{errors.name}</p>
+                  )}
                 </div>
-                <ArrowRight className="h-5 w-5 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
-              </a>
 
-              <a
-                href="#"
-                className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-5 transition-all hover:border-primary/50 hover:bg-primary/5"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                    <Github className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-xs uppercase tracking-wider text-muted-foreground">
-                      GitHub
-                    </div>
-                    <div className="font-medium text-foreground">
-                      @mcarpenteros
-                    </div>
-                  </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="contact-email" className="text-xs uppercase tracking-wider text-muted-foreground">
+                    Email
+                  </Label>
+                  <Input
+                    id="contact-email"
+                    type="email"
+                    placeholder="you@company.com"
+                    maxLength={255}
+                    value={form.email}
+                    onChange={handleChange("email")}
+                    aria-invalid={!!errors.email}
+                    className="border-border bg-background/40"
+                  />
+                  {errors.email && (
+                    <p className="text-xs text-destructive">{errors.email}</p>
+                  )}
                 </div>
-                <ArrowRight className="h-5 w-5 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
-              </a>
-            </div>
+              </div>
+
+              <div className="mt-4 space-y-1.5">
+                <Label htmlFor="contact-subject" className="text-xs uppercase tracking-wider text-muted-foreground">
+                  Subject
+                </Label>
+                <Input
+                  id="contact-subject"
+                  placeholder="What's this about?"
+                  maxLength={150}
+                  value={form.subject}
+                  onChange={handleChange("subject")}
+                  aria-invalid={!!errors.subject}
+                  className="border-border bg-background/40"
+                />
+                {errors.subject && (
+                  <p className="text-xs text-destructive">{errors.subject}</p>
+                )}
+              </div>
+
+              <div className="mt-4 space-y-1.5">
+                <Label htmlFor="contact-message" className="text-xs uppercase tracking-wider text-muted-foreground">
+                  Message
+                </Label>
+                <Textarea
+                  id="contact-message"
+                  placeholder="Tell me about your project, goals, and timeline…"
+                  rows={5}
+                  maxLength={1000}
+                  value={form.message}
+                  onChange={handleChange("message")}
+                  aria-invalid={!!errors.message}
+                  className="resize-none border-border bg-background/40"
+                />
+                <div className="flex items-center justify-between">
+                  {errors.message ? (
+                    <p className="text-xs text-destructive">{errors.message}</p>
+                  ) : (
+                    <span />
+                  )}
+                  <span className="text-[10px] font-mono text-muted-foreground">
+                    {form.message.length}/1000
+                  </span>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-semibold text-primary-foreground transition-all hover:bg-primary-glow glow-sm hover:glow-ring disabled:opacity-60"
+              >
+                {submitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </>
+                )}
+              </button>
+            </form>
           </div>
         </div>
 

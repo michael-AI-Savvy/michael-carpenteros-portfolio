@@ -64,7 +64,7 @@ export function Hero() {
         </div>
 
         {/* Right portrait */}
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center pt-16 lg:pt-20">
           <div className="relative aspect-square w-full max-w-[480px]">
             {/* Outer rotating ring */}
             <div className="absolute inset-0 rounded-full border border-primary/20 spin-slow" />

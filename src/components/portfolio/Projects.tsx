@@ -49,9 +49,9 @@ const projects = [
   {
     title: "AI Agent Document Workflow",
     category: "AI Chatbot",
-    desc: "Advanced n8n automation with JavaScript code execution, AI agent orchestration, and Google Gemini integration for intelligent document processing.",
-    tags: ["n8n", "AI Agent", "JavaScript", "Gemini"],
-    image: projectN8nSamples,
+    desc: "Multi-step n8n workflow integrating Ceipal ATS with Google Sheets. A Schedule Trigger fetches placements, parses XML to JSON, runs JavaScript transformations, normalizes records, removes duplicates, and appends user rows to a sheet.",
+    tags: ["n8n", "Ceipal", "JavaScript", "Sheets"],
+    image: projectCeipalAts,
   },
   {
     title: "Social Media Content Generator",
@@ -63,9 +63,9 @@ const projects = [
   {
     title: "AI Agent with Multi-Model Integration",
     category: "AI Chatbot",
-    desc: "Advanced n8n AI agent featuring Google Gemini, OpenAI chat models, structured output parsing, Discord channel creation, and email notifications.",
-    tags: ["n8n", "AI Agent", "OpenAI", "Discord"],
-    image: projectCeipalAts,
+    desc: "Advanced n8n AI agent featuring Google Gemini, OpenAI chat models, Simple Memory, a Structured Output Parser, GetInvoices tool, Loop Over Items, Discord channel creation, and conditional email notifications.",
+    tags: ["n8n", "AI Agent", "Gemini", "OpenAI", "Discord"],
+    image: projectN8nSamples,
   },
   {
     title: "Ceipal ATS Data Sync Automation",

@@ -29,16 +29,40 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Michael Carpenteros — AI Automation & CRM Specialist" },
+      {
+        name: "description",
+        content:
+          "AI Automation & CRM Specialist designing AI-powered systems with n8n, Make.com, Zapier and HubSpot to streamline operations and maximize ROI.",
+      },
+      { name: "author", content: "Michael Carpenteros" },
+      {
+        property: "og:title",
+        content: "Michael Carpenteros — AI Automation & CRM Specialist",
+      },
+      {
+        property: "og:description",
+        content:
+          "Designing, integrating and deploying AI-powered systems that streamline operations and maximize ROI.",
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "anonymous",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,

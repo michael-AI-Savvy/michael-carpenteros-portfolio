@@ -80,7 +80,9 @@ export function Hero() {
             {/* Portrait */}
             <div
               className="absolute inset-8 overflow-hidden rounded-full border-2 border-primary/40 glow-ring bg-cover bg-center"
-              style={{ backgroundImage: `url(${portraitBg})` }}
+              style={{
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${portraitBg})`,
+              }}
             >
               <img
                 src={portrait}
@@ -88,6 +90,10 @@ export function Hero() {
                 width={1024}
                 height={1024}
                 className="h-full w-full object-cover object-top scale-125 translate-y-4"
+                style={{
+                  filter: "contrast(1.1) saturate(1.1) brightness(1.05)",
+                  imageRendering: "auto",
+                }}
               />
             </div>
 

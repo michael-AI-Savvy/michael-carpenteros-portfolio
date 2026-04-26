@@ -62,7 +62,7 @@ export function Contact() {
     const body = `Name: ${result.data.name}%0D%0AEmail: ${result.data.email}%0D%0A%0D%0A${encodeURIComponent(
       result.data.message,
     )}`;
-    const mailto = `mailto:hello@michaelcarpenteros.com?subject=${encodeURIComponent(
+    const mailto = `mailto:michaelcarpenteros@gmail.com?subject=${encodeURIComponent(
       result.data.subject,
     )}&body=${body}`;
 

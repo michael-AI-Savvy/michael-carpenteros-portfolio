@@ -77,13 +77,13 @@ export function Hero() {
             <div className="absolute inset-8 rounded-full bg-primary/20 blur-2xl" />
 
             {/* Portrait */}
-            <div className="absolute inset-8 overflow-hidden rounded-full border-2 border-primary/40 glow-ring">
+            <div className="absolute inset-8 overflow-hidden rounded-full border-2 border-primary/40 glow-ring bg-gradient-to-br from-primary/20 to-primary/5">
               <img
                 src={portrait}
                 alt="Michael Carpenteros portrait"
                 width={1024}
                 height={1024}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-top"
               />
             </div>
 

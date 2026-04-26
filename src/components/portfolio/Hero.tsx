@@ -1,5 +1,5 @@
 import { Github, Linkedin, Mail, ArrowRight, Code2, Braces } from "lucide-react";
-import portrait from "@/assets/portrait.jpg";
+import portrait from "@/assets/portrait.png";
 
 export function Hero() {
   return (

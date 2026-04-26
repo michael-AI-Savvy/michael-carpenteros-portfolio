@@ -1,5 +1,6 @@
 import { Github, Linkedin, Mail, ArrowRight, Code2, Braces } from "lucide-react";
 import portrait from "@/assets/portrait.png";
+import portraitBg from "@/assets/portrait-bg.png";
 
 export function Hero() {
   return (
@@ -77,13 +78,16 @@ export function Hero() {
             <div className="absolute inset-8 rounded-full bg-primary/20 blur-2xl" />
 
             {/* Portrait */}
-            <div className="absolute inset-8 overflow-hidden rounded-full border-2 border-primary/40 glow-ring bg-gradient-to-br from-primary/20 to-primary/5">
+            <div
+              className="absolute inset-8 overflow-hidden rounded-full border-2 border-primary/40 glow-ring bg-cover bg-center"
+              style={{ backgroundImage: `url(${portraitBg})` }}
+            >
               <img
                 src={portrait}
                 alt="Michael Carpenteros portrait"
                 width={1024}
                 height={1024}
-                className="h-full w-full object-cover object-top"
+                className="h-full w-full object-cover object-top scale-125 translate-y-4"
               />
             </div>
 

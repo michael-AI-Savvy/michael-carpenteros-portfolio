@@ -103,64 +103,65 @@ export function Contact() {
 
               <div className="mt-8 space-y-3">
                 <a
-                  href="mailto:hello@michaelcarpenteros.com"
+                  href="mailto:michaelcarpenteros@gmail.com"
                   className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
                       <Mail className="h-4 w-4" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
                         Email
                       </div>
-                      <div className="text-sm font-medium text-foreground">
-                        hello@michaelcarpenteros.com
+                      <div className="truncate text-sm font-medium text-foreground">
+                        michaelcarpenteros@gmail.com
                       </div>
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
                 </a>
 
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/michael-carpenteros-4462b213a"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
                       <Linkedin className="h-4 w-4" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
                         LinkedIn
                       </div>
-                      <div className="text-sm font-medium text-foreground">
-                        /in/michaelcarpenteros
+                      <div className="truncate text-sm font-medium text-foreground">
+                        /in/michael-carpenteros-4462b213a
                       </div>
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
                 </a>
 
-                <a
-                  href="#"
-                  className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
-                >
+                <div className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4">
                   <div className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
                       <Github className="h-4 w-4" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
                         GitHub
                       </div>
-                      <div className="text-sm font-medium text-foreground">
-                        @mcarpenteros
+                      <div className="truncate text-sm font-medium text-foreground">
+                        michaelcarpenteros-2b9c6d50
                       </div>
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
-                </a>
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                    Private
+                  </span>
+                </div>
               </div>
             </div>
 

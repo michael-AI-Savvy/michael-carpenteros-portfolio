@@ -58,20 +58,31 @@ export function Contact() {
     }
 
     setSubmitting(true);
-    // Open user's email client with prefilled content (no backend required)
-    const body = `Name: ${result.data.name}%0D%0AEmail: ${result.data.email}%0D%0A%0D%0A${encodeURIComponent(
-      result.data.message,
-    )}`;
-    const mailto = `mailto:michaelcarpenteros@gmail.com?subject=${encodeURIComponent(
-      result.data.subject,
-    )}&body=${body}`;
-
     try {
-      window.location.href = mailto;
-      toast.success("Opening your email client…", {
-        description: "Your message is ready to send.",
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(result.data),
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        console.error("Contact send failed", res.status, body);
+        toast.error("Couldn't send your message", {
+          description: "Please try again in a moment, or email me directly.",
+        });
+        return;
+      }
+
+      toast.success("Message sent!", {
+        description: "Thanks for reaching out — I'll reply as soon as I can.",
       });
       setForm({ name: "", email: "", subject: "", message: "" });
+    } catch (err) {
+      console.error("Contact send error", err);
+      toast.error("Network error", {
+        description: "Please check your connection and try again.",
+      });
     } finally {
       setSubmitting(false);
     }

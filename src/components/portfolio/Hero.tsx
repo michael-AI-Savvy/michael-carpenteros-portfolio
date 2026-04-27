@@ -89,7 +89,7 @@ export function Hero() {
                 alt="Michael Carpenteros portrait"
                 width={1024}
                 height={1024}
-                className="h-full w-full object-cover object-top scale-125 translate-y-4"
+                className="h-full w-full object-cover object-top scale-150 translate-y-6"
                 style={{
                   filter: "contrast(1.1) saturate(1.1) brightness(1.05)",
                   imageRendering: "auto",

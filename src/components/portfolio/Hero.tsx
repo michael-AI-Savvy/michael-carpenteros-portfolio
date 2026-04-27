@@ -9,7 +9,7 @@ export function Hero() {
       <div className="pointer-events-none absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-primary/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl" />
 
-      <div className="relative mx-auto grid min-h-screen max-w-7xl grid-cols-1 items-center gap-12 px-6 py-24 lg:grid-cols-2 lg:py-0">
+      <div className="relative mx-auto grid min-h-screen max-w-7xl grid-cols-1 items-center gap-12 px-6 pt-32 pb-24 lg:grid-cols-2 lg:pt-24 lg:pb-0">
         {/* Left content */}
         <div className="fade-in-up">
           <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-5 py-2 backdrop-blur-sm">

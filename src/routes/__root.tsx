@@ -58,6 +58,13 @@ export const Route = createRootRoute({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { property: "og:title", content: "Michael Carpenteros — AI Automation & CRM Specialist" },
+      { name: "twitter:title", content: "Michael Carpenteros — AI Automation & CRM Specialist" },
+      { name: "description", content: "A dynamic portfolio showcasing projects, certifications, and contact information." },
+      { property: "og:description", content: "A dynamic portfolio showcasing projects, certifications, and contact information." },
+      { name: "twitter:description", content: "A dynamic portfolio showcasing projects, certifications, and contact information." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/44941df9-191b-4882-86e0-0f7bb76dde4a/id-preview-4aff0f7f--4c73f053-4894-4740-bb3c-32802f093610.lovable.app-1777256900851.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/44941df9-191b-4882-86e0-0f7bb76dde4a/id-preview-4aff0f7f--4c73f053-4894-4740-bb3c-32802f093610.lovable.app-1777256900851.png" },
     ],
     links: [
       {

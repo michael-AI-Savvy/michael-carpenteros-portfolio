@@ -34,21 +34,17 @@ export function Hero() {
         {/* Left content */}
         <div className="fade-in-up">
           <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-5 py-2 backdrop-blur-sm">
-            <span className="text-sm font-medium text-primary">
-              AI Automation | CRM Specialist | Workflow Engineer
-            </span>
+            <span className="text-sm font-medium text-primary">{c.badge}</span>
           </div>
 
           <h1 className="mt-8 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
             Hi, I'm
             <br />
-            <span className="text-gradient">Michael Carpenteros</span>
+            <span className="text-gradient">{c.name}</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            I design, integrate, and deploy AI-powered systems with n8n,
-            Make.com, and Zapier — turning manual workflows into automated
-            engines that streamline operations and maximize ROI.
+            {c.tagline}
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">

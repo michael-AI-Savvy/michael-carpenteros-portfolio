@@ -56,6 +56,12 @@ export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
+  const [c, setC] = useState<ContactContent>(DEFAULTS);
+
+  useEffect(() => {
+    supabase.from("site_content").select("value").eq("key", "contact").maybeSingle()
+      .then(({ data }) => data && setC({ ...DEFAULTS, ...(data.value as Partial<ContactContent>) }));
+  }, []);
 
   const handleChange = (field: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

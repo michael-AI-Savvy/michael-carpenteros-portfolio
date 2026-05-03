@@ -1,10 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Mail, Github, Linkedin, ArrowRight, Send, Loader2 } from "lucide-react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { supabase } from "@/integrations/supabase/client";
+
+interface ContactContent {
+  heading: string;
+  headingAccent: string;
+  intro: string;
+  email: string;
+  linkedin: string;
+  linkedinLabel: string;
+  github: string;
+}
+
+const DEFAULTS: ContactContent = {
+  heading: "Let's automate",
+  headingAccent: "your next idea.",
+  intro: "Open to consulting, freelance projects, and full-time opportunities. Reach out and let's build something that scales.",
+  email: "michaelcarpenteros@gmail.com",
+  linkedin: "https://www.linkedin.com/in/michael-carpenteros-4462b213a",
+  linkedinLabel: "/in/michael-carpenteros-4462b213a",
+  github: "michaelcarpenteros-2b9c6d50",
+};
 
 const contactSchema = z.object({
   name: z

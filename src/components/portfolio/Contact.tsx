@@ -131,17 +131,14 @@ export function Contact() {
                 </span>
               </div>
               <h2 className="mt-6 font-display text-4xl font-bold leading-tight md:text-5xl">
-                Let's automate <br />
-                <span className="text-gradient">your next idea.</span>
+                {c.heading} <br />
+                <span className="text-gradient">{c.headingAccent}</span>
               </h2>
-              <p className="mt-5 text-muted-foreground">
-                Open to consulting, freelance projects, and full-time
-                opportunities. Reach out and let's build something that scales.
-              </p>
+              <p className="mt-5 text-muted-foreground">{c.intro}</p>
 
               <div className="mt-8 space-y-3">
                 <a
-                  href="mailto:michaelcarpenteros@gmail.com"
+                  href={`mailto:${c.email}`}
                   className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
                 >
                   <div className="flex items-center gap-4">
@@ -149,19 +146,15 @@ export function Contact() {
                       <Mail className="h-4 w-4" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                        Email
-                      </div>
-                      <div className="truncate text-sm font-medium text-foreground">
-                        michaelcarpenteros@gmail.com
-                      </div>
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Email</div>
+                      <div className="truncate text-sm font-medium text-foreground">{c.email}</div>
                     </div>
                   </div>
                   <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/in/michael-carpenteros-4462b213a"
+                  href={c.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
@@ -171,12 +164,8 @@ export function Contact() {
                       <Linkedin className="h-4 w-4" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                        LinkedIn
-                      </div>
-                      <div className="truncate text-sm font-medium text-foreground">
-                        /in/michael-carpenteros-4462b213a
-                      </div>
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">LinkedIn</div>
+                      <div className="truncate text-sm font-medium text-foreground">{c.linkedinLabel}</div>
                     </div>
                   </div>
                   <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
@@ -188,12 +177,8 @@ export function Contact() {
                       <Github className="h-4 w-4" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                        GitHub
-                      </div>
-                      <div className="truncate text-sm font-medium text-foreground">
-                        michaelcarpenteros-2b9c6d50
-                      </div>
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">GitHub</div>
+                      <div className="truncate text-sm font-medium text-foreground">{c.github}</div>
                     </div>
                   </div>
                   <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">

@@ -132,15 +132,15 @@ export function Hero() {
             </div>
 
             {/* Available badge */}
+            {c.available && (
             <div className="absolute bottom-6 right-2 flex items-center gap-2 rounded-full bg-background/90 px-4 py-2 backdrop-blur-md border border-primary/30">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
               </span>
-              <span className="text-sm font-medium text-foreground">
-                Available
-              </span>
+              <span className="text-sm font-medium text-foreground">Available</span>
             </div>
+            )}
           </div>
         </div>
       </div>

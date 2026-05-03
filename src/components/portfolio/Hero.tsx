@@ -1,8 +1,29 @@
+import { useEffect, useState } from "react";
 import { Github, Linkedin, Mail, ArrowRight, Code2, Braces } from "lucide-react";
 import portrait from "@/assets/portrait.png";
 import portraitBg from "@/assets/portrait-bg.png";
+import { supabase } from "@/integrations/supabase/client";
+
+interface HeroContent {
+  badge: string;
+  name: string;
+  tagline: string;
+  available: boolean;
+}
 
 export function Hero() {
+  const [c, setC] = useState<HeroContent>({
+    badge: "AI Automation | CRM Specialist | Workflow Engineer",
+    name: "Michael Carpenteros",
+    tagline: "I design, integrate, and deploy AI-powered systems with n8n, Make.com, and Zapier — turning manual workflows into automated engines that streamline operations and maximize ROI.",
+    available: true,
+  });
+
+  useEffect(() => {
+    supabase.from("site_content").select("value").eq("key", "hero").maybeSingle()
+      .then(({ data }) => data && setC(data.value as unknown as HeroContent));
+  }, []);
+
   return (
     <section className="relative min-h-screen overflow-hidden grid-pattern">
       {/* Glow orbs */}

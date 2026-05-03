@@ -1,8 +1,29 @@
+import { useEffect, useState } from "react";
 import { Github, Linkedin, Mail, ArrowRight, Code2, Braces } from "lucide-react";
 import portrait from "@/assets/portrait.png";
 import portraitBg from "@/assets/portrait-bg.png";
+import { supabase } from "@/integrations/supabase/client";
+
+interface HeroContent {
+  badge: string;
+  name: string;
+  tagline: string;
+  available: boolean;
+}
 
 export function Hero() {
+  const [c, setC] = useState<HeroContent>({
+    badge: "AI Automation | CRM Specialist | Workflow Engineer",
+    name: "Michael Carpenteros",
+    tagline: "I design, integrate, and deploy AI-powered systems with n8n, Make.com, and Zapier — turning manual workflows into automated engines that streamline operations and maximize ROI.",
+    available: true,
+  });
+
+  useEffect(() => {
+    supabase.from("site_content").select("value").eq("key", "hero").maybeSingle()
+      .then(({ data }) => data && setC(data.value as unknown as HeroContent));
+  }, []);
+
   return (
     <section className="relative min-h-screen overflow-hidden grid-pattern">
       {/* Glow orbs */}
@@ -13,21 +34,17 @@ export function Hero() {
         {/* Left content */}
         <div className="fade-in-up">
           <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-5 py-2 backdrop-blur-sm">
-            <span className="text-sm font-medium text-primary">
-              AI Automation | CRM Specialist | Workflow Engineer
-            </span>
+            <span className="text-sm font-medium text-primary">{c.badge}</span>
           </div>
 
           <h1 className="mt-8 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
             Hi, I'm
             <br />
-            <span className="text-gradient">Michael Carpenteros</span>
+            <span className="text-gradient">{c.name}</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            I design, integrate, and deploy AI-powered systems with n8n,
-            Make.com, and Zapier — turning manual workflows into automated
-            engines that streamline operations and maximize ROI.
+            {c.tagline}
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -115,15 +132,15 @@ export function Hero() {
             </div>
 
             {/* Available badge */}
+            {c.available && (
             <div className="absolute bottom-6 right-2 flex items-center gap-2 rounded-full bg-background/90 px-4 py-2 backdrop-blur-md border border-primary/30">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
               </span>
-              <span className="text-sm font-medium text-foreground">
-                Available
-              </span>
+              <span className="text-sm font-medium text-foreground">Available</span>
             </div>
+            )}
           </div>
         </div>
       </div>

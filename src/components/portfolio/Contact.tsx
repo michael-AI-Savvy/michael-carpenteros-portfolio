@@ -1,31 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Mail, Github, Linkedin, ArrowRight, Send, Loader2 } from "lucide-react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
-
-interface ContactContent {
-  heading: string;
-  headingAccent: string;
-  intro: string;
-  email: string;
-  linkedin: string;
-  linkedinLabel: string;
-  github: string;
-}
-
-const DEFAULTS: ContactContent = {
-  heading: "Let's automate",
-  headingAccent: "your next idea.",
-  intro: "Open to consulting, freelance projects, and full-time opportunities. Reach out and let's build something that scales.",
-  email: "michaelcarpenteros@gmail.com",
-  linkedin: "https://www.linkedin.com/in/michael-carpenteros-4462b213a",
-  linkedinLabel: "/in/michael-carpenteros-4462b213a",
-  github: "michaelcarpenteros-2b9c6d50",
-};
 
 const contactSchema = z.object({
   name: z
@@ -56,12 +35,6 @@ export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [c, setC] = useState<ContactContent>(DEFAULTS);
-
-  useEffect(() => {
-    supabase.from("site_content").select("value").eq("key", "contact").maybeSingle()
-      .then(({ data }) => data && setC({ ...DEFAULTS, ...(data.value as Partial<ContactContent>) }));
-  }, []);
 
   const handleChange = (field: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -131,14 +104,17 @@ export function Contact() {
                 </span>
               </div>
               <h2 className="mt-6 font-display text-4xl font-bold leading-tight md:text-5xl">
-                {c.heading} <br />
-                <span className="text-gradient">{c.headingAccent}</span>
+                Let's automate <br />
+                <span className="text-gradient">your next idea.</span>
               </h2>
-              <p className="mt-5 text-muted-foreground">{c.intro}</p>
+              <p className="mt-5 text-muted-foreground">
+                Open to consulting, freelance projects, and full-time
+                opportunities. Reach out and let's build something that scales.
+              </p>
 
               <div className="mt-8 space-y-3">
                 <a
-                  href={`mailto:${c.email}`}
+                  href="mailto:michaelcarpenteros@gmail.com"
                   className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
                 >
                   <div className="flex items-center gap-4">
@@ -146,15 +122,19 @@ export function Contact() {
                       <Mail className="h-4 w-4" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Email</div>
-                      <div className="truncate text-sm font-medium text-foreground">{c.email}</div>
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                        Email
+                      </div>
+                      <div className="truncate text-sm font-medium text-foreground">
+                        michaelcarpenteros@gmail.com
+                      </div>
                     </div>
                   </div>
                   <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
                 </a>
 
                 <a
-                  href={c.linkedin}
+                  href="https://www.linkedin.com/in/michael-carpenteros-4462b213a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
@@ -164,8 +144,12 @@ export function Contact() {
                       <Linkedin className="h-4 w-4" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">LinkedIn</div>
-                      <div className="truncate text-sm font-medium text-foreground">{c.linkedinLabel}</div>
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                        LinkedIn
+                      </div>
+                      <div className="truncate text-sm font-medium text-foreground">
+                        /in/michael-carpenteros-4462b213a
+                      </div>
                     </div>
                   </div>
                   <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
@@ -177,8 +161,12 @@ export function Contact() {
                       <Github className="h-4 w-4" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">GitHub</div>
-                      <div className="truncate text-sm font-medium text-foreground">{c.github}</div>
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                        GitHub
+                      </div>
+                      <div className="truncate text-sm font-medium text-foreground">
+                        michaelcarpenteros-2b9c6d50
+                      </div>
                     </div>
                   </div>
                   <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">

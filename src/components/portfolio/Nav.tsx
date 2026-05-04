@@ -29,13 +29,6 @@ export function Nav() {
             </a>
           ))}
         </div>
-        <Link
-          to="/admin"
-          className="ml-1 rounded-full border border-border bg-surface/40 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-primary"
-          title="Admin"
-        >
-          ⚙
-        </Link>
         <a
           href="#contact"
           className="ml-1 rounded-full bg-primary px-4 py-1.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary-glow"

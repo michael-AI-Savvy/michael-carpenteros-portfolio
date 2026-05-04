@@ -1,19 +1,11 @@
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-
-interface Stat { value: string; label: string }
+const stats = [
+  { value: "8+", label: "AI Automations Built" },
+  { value: "80%", label: "Process Optimization" },
+  { value: "8+", label: "Happy Clients" },
+  { value: "300%", label: "Average ROI Increase" },
+];
 
 export function Stats() {
-  const [stats, setStats] = useState<Stat[]>([]);
-
-  useEffect(() => {
-    supabase
-      .from("stats")
-      .select("value,label")
-      .order("sort_order", { ascending: true })
-      .then(({ data }) => setStats((data ?? []) as Stat[]));
-  }, []);
-
   return (
     <section className="relative border-y border-border/50 bg-surface/30 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-6 py-16">

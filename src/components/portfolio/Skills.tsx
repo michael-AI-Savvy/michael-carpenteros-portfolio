@@ -1,17 +1,22 @@
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+const skills = [
+  "n8n",
+  "Make.com",
+  "Zapier",
+  "GoHighLevel",
+  "HubSpot",
+  "Salesforce",
+  "Pipedrive",
+  "ManyChat",
+  "ChatGPT API",
+  "Google Gemini",
+  "JavaScript",
+  "WordPress",
+  "Elementor",
+  "API Integration",
+  "Webhooks",
+];
 
 export function Skills() {
-  const [skills, setSkills] = useState<string[]>([]);
-
-  useEffect(() => {
-    supabase
-      .from("skills")
-      .select("name")
-      .order("sort_order", { ascending: true })
-      .then(({ data }) => setSkills((data ?? []).map((s) => s.name)));
-  }, []);
-
   return (
     <section id="skills" className="relative py-28">
       <div className="mx-auto max-w-7xl px-6">
@@ -25,7 +30,8 @@ export function Skills() {
             Technical <span className="text-gradient">Skills</span>
           </h2>
           <p className="mt-4 text-muted-foreground">
-            The tools and platforms I use to build automation systems that scale.
+            The tools and platforms I use to build automation systems that
+            scale.
           </p>
         </div>
 
@@ -34,7 +40,9 @@ export function Skills() {
             <span
               key={skill}
               className="rounded-full border border-border bg-surface/60 px-5 py-2.5 font-mono text-sm text-foreground backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary"
-              style={{ animation: `fade-in-up 0.6s ease-out ${i * 0.04}s both` }}
+              style={{
+                animation: `fade-in-up 0.6s ease-out ${i * 0.04}s both`,
+              }}
             >
               {skill}
             </span>

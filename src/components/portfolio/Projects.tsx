@@ -1,32 +1,83 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ArrowUpRight, Maximize2 } from "lucide-react";
 import {
-  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
-import { supabase } from "@/integrations/supabase/client";
-import { resolveImage } from "@/lib/portfolio-assets";
+import projectAiChatbot from "@/assets/project-ai-chatbot.png";
+import projectUpwork from "@/assets/project-upwork.png";
+import projectAutoDm from "@/assets/project-auto-dm.jpg";
+import projectN8nSamples from "@/assets/project-n8n-samples.png";
+import projectFinalOutput from "@/assets/project-final-output.png";
+import projectGenerator from "@/assets/project-generator.png";
+import projectCeipalAts from "@/assets/project-ceipal-ats.png";
+import projectCeipalCombine from "@/assets/project-ceipal-combine.png";
+import projectZapierChatbot from "@/assets/project-zapier-chatbot.png";
 
-interface Project {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  tags: string[];
-  image_url: string | null;
-  image_key: string | null;
-}
+const projects = [
+  {
+    title: "AI Chatbot with Document Processing",
+    category: "AI Chatbot",
+    desc: "Built intelligent n8n webhook-triggered chatbot using Google Gemini AI for automated document analysis and instant HTTP responses with conditional logic.",
+    tags: ["n8n", "Google Gemini", "Webhooks", "Document AI"],
+    image: projectAiChatbot,
+  },
+  {
+    title: "Project Management Integration Hub",
+    category: "Process Automation",
+    desc: "Seamless Make.com workflow connecting Asana task management with Xero accounting and Google Sheets for real-time project tracking and financial reporting.",
+    tags: ["Make.com", "Asana", "Xero", "Google Sheets"],
+    image: projectUpwork,
+  },
+  {
+    title: "ManyChat Auto-DM Funnel",
+    category: "Chatbot Marketing",
+    desc: "Complex ManyChat automation with conditional branching, personalized messaging sequences, and email integration for lead nurturing and customer engagement.",
+    tags: ["ManyChat", "Messenger", "Email", "Lead Nurturing"],
+    image: projectAutoDm,
+  },
+  {
+    title: "Zapier AI Chatbot Assistant",
+    category: "AI Chatbot",
+    desc: "Multi-path Zapier Zap triggered by new Facebook Messenger messages. Conditional Paths route the conversation, pull contextual content from Google Docs, generate intelligent ChatGPT replies, and send the response back to the user on Messenger.",
+    tags: ["Zapier", "Messenger", "Paths", "ChatGPT", "Google Docs"],
+    image: projectZapierChatbot,
+  },
+  {
+    title: "AI Agent Document Workflow",
+    category: "AI Chatbot",
+    desc: "Multi-step n8n workflow integrating Ceipal ATS with Google Sheets. A Schedule Trigger fetches placements, parses XML to JSON, runs JavaScript transformations, normalizes records, removes duplicates, and appends user rows to a sheet.",
+    tags: ["n8n", "Ceipal", "JavaScript", "Sheets"],
+    image: projectCeipalAts,
+  },
+  {
+    title: "Social Media Content Generator",
+    category: "Process Automation",
+    desc: "Automated n8n workflow for scheduled Facebook and YouTube Reels creation. JWT auth, AI-powered video generation, and multi-platform publishing.",
+    tags: ["n8n", "Video AI", "YouTube API", "Social Media"],
+    image: projectGenerator,
+  },
+  {
+    title: "AI Agent with Multi-Model Integration",
+    category: "AI Chatbot",
+    desc: "Advanced n8n AI agent featuring Google Gemini, OpenAI chat models, Simple Memory, a Structured Output Parser, GetInvoices tool, Loop Over Items, Discord channel creation, and conditional email notifications.",
+    tags: ["n8n", "AI Agent", "Gemini", "OpenAI", "Discord"],
+    image: projectN8nSamples,
+  },
+  {
+    title: "Ceipal ATS Data Sync Automation",
+    category: "Process Automation",
+    desc: "Comprehensive n8n workflow integrating Ceipal ATS with Google Sheets. Scheduled extraction, XML parsing, JS transformations, and duplicate removal.",
+    tags: ["n8n", "Ceipal ATS", "Sheets", "JavaScript"],
+    image: projectCeipalCombine,
+  },
+];
 
 export function Projects() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [selected, setSelected] = useState<Project | null>(null);
-
-  useEffect(() => {
-    supabase
-      .from("projects")
-      .select("id,title,category,description,tags,image_url,image_key")
-      .order("sort_order", { ascending: true })
-      .then(({ data }) => setProjects((data ?? []) as Project[]));
-  }, []);
+  const [selected, setSelected] = useState<(typeof projects)[number] | null>(null);
 
   return (
     <section id="projects" className="relative py-28">
@@ -34,58 +85,72 @@ export function Projects() {
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
             <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5">
-              <span className="font-mono text-xs uppercase tracking-widest text-primary">03 / Work</span>
+              <span className="font-mono text-xs uppercase tracking-widest text-primary">
+                03 / Work
+              </span>
             </div>
             <h2 className="mt-6 font-display text-4xl font-bold md:text-5xl">
               Key <span className="text-gradient">Projects</span>
             </h2>
           </div>
           <p className="max-w-md text-muted-foreground">
-            A selection of automation systems, AI agents, and integrations built for real businesses. Click any card to view the workflow.
+            A selection of automation systems, AI agents, and integrations
+            built for real businesses. Click any card to view the workflow.
           </p>
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {projects.map((p) => {
-            const img = resolveImage(p.image_url, p.image_key);
-            return (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => setSelected(p)}
-                className="group relative overflow-hidden rounded-2xl border border-border card-gradient text-left transition-all hover:border-primary/50 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              >
-                <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-primary/10 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="relative aspect-video overflow-hidden border-b border-border/60 bg-background/40">
-                  {img && (
-                    <img src={img} alt={`${p.title} workflow preview`} loading="lazy"
-                      className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
-                  <div className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-background/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-foreground backdrop-blur-sm opacity-0 transition-opacity group-hover:opacity-100">
-                    <Maximize2 className="h-3 w-3" /> View
-                  </div>
+          {projects.map((p) => (
+            <button
+              key={p.title}
+              type="button"
+              onClick={() => setSelected(p)}
+              className="group relative overflow-hidden rounded-2xl border border-border card-gradient text-left transition-all hover:border-primary/50 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-primary/10 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+              <div className="relative aspect-video overflow-hidden border-b border-border/60 bg-background/40">
+                <img
+                  src={p.image}
+                  alt={`${p.title} workflow preview`}
+                  loading="lazy"
+                  className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
+                <div className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-background/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-foreground backdrop-blur-sm opacity-0 transition-opacity group-hover:opacity-100">
+                  <Maximize2 className="h-3 w-3" />
+                  View
                 </div>
-                <div className="relative p-7">
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="rounded-full bg-primary/15 px-3 py-1 font-mono text-xs uppercase tracking-wider text-primary">
-                      {p.category}
+              </div>
+
+              <div className="relative p-7">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="rounded-full bg-primary/15 px-3 py-1 font-mono text-xs uppercase tracking-wider text-primary">
+                    {p.category}
+                  </span>
+                  <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:rotate-12" />
+                </div>
+
+                <h3 className="mt-5 font-display text-xl font-semibold leading-snug text-foreground md:text-2xl">
+                  {p.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-muted-foreground">
+                  {p.desc}
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {p.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-md border border-border/60 bg-background/40 px-2.5 py-1 font-mono text-xs text-muted-foreground"
+                    >
+                      {t}
                     </span>
-                    <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:rotate-12" />
-                  </div>
-                  <h3 className="mt-5 font-display text-xl font-semibold leading-snug text-foreground md:text-2xl">{p.title}</h3>
-                  <p className="mt-3 leading-relaxed text-muted-foreground">{p.description}</p>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {p.tags.map((t) => (
-                      <span key={t} className="rounded-md border border-border/60 bg-background/40 px-2.5 py-1 font-mono text-xs text-muted-foreground">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                  ))}
                 </div>
-              </button>
-            );
-          })}
+              </div>
+            </button>
+          ))}
         </div>
       </div>
 
@@ -97,17 +162,28 @@ export function Projects() {
                 <span className="w-fit rounded-full bg-primary/15 px-3 py-1 font-mono text-xs uppercase tracking-wider text-primary">
                   {selected.category}
                 </span>
-                <DialogTitle className="mt-3 font-display text-2xl">{selected.title}</DialogTitle>
-                <DialogDescription className="text-muted-foreground">{selected.description}</DialogDescription>
+                <DialogTitle className="mt-3 font-display text-2xl">
+                  {selected.title}
+                </DialogTitle>
+                <DialogDescription className="text-muted-foreground">
+                  {selected.desc}
+                </DialogDescription>
               </DialogHeader>
-              {resolveImage(selected.image_url, selected.image_key) && (
-                <div className="overflow-hidden border-t border-border bg-background/40">
-                  <img src={resolveImage(selected.image_url, selected.image_key)!} alt={`${selected.title} workflow`} className="h-auto w-full object-contain" />
-                </div>
-              )}
+              <div className="overflow-hidden border-t border-border bg-background/40">
+                <img
+                  src={selected.image}
+                  alt={`${selected.title} workflow`}
+                  className="h-auto w-full object-contain"
+                />
+              </div>
               <div className="flex flex-wrap gap-2 px-6 pb-6">
                 {selected.tags.map((t) => (
-                  <span key={t} className="rounded-md border border-border/60 bg-background/40 px-2.5 py-1 font-mono text-xs text-muted-foreground">{t}</span>
+                  <span
+                    key={t}
+                    className="rounded-md border border-border/60 bg-background/40 px-2.5 py-1 font-mono text-xs text-muted-foreground"
+                  >
+                    {t}
+                  </span>
                 ))}
               </div>
             </>

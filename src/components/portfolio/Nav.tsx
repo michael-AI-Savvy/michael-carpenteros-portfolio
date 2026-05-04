@@ -1,5 +1,3 @@
-import { Link } from "@tanstack/react-router";
-
 const links = [
   { href: "#about", label: "About" },
   { href: "#skills", label: "Skills" },
@@ -12,12 +10,12 @@ export function Nav() {
   return (
     <nav className="fixed top-4 left-1/2 z-50 -translate-x-1/2">
       <div className="flex items-center gap-1 rounded-full border border-border bg-background/70 px-2 py-2 backdrop-blur-xl shadow-elegant">
-        <Link
-          to="/"
+        <a
+          href="/"
           className="px-4 py-1.5 font-display text-sm font-semibold text-foreground"
         >
           MC<span className="text-primary">.</span>
-        </Link>
+        </a>
         <div className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
             <a

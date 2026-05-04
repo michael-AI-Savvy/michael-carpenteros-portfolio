@@ -58,10 +58,24 @@ export function Contact() {
     }
 
     setSubmitting(true);
+    const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
+
+    if (!formspreeEndpoint) {
+      const mailto = new URL("mailto:michaelcarpenteros@gmail.com");
+      mailto.searchParams.set("subject", result.data.subject);
+      mailto.searchParams.set(
+        "body",
+        `Name: ${result.data.name}\nEmail: ${result.data.email}\n\n${result.data.message}`,
+      );
+      window.location.href = mailto.toString();
+      setSubmitting(false);
+      return;
+    }
+
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(formspreeEndpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(result.data),
       });
 

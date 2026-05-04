@@ -1,0 +1,34 @@
+import { Toaster } from "@/components/ui/sonner";
+import { Nav } from "@/components/portfolio/Nav";
+import { Hero } from "@/components/portfolio/Hero";
+import { Stats } from "@/components/portfolio/Stats";
+import { About } from "@/components/portfolio/About";
+import { Skills } from "@/components/portfolio/Skills";
+import { Projects } from "@/components/portfolio/Projects";
+import { Certifications } from "@/components/portfolio/Certifications";
+import { Testimonial } from "@/components/portfolio/Testimonial";
+import { Testimonials } from "@/components/portfolio/Testimonials";
+import { Contact } from "@/components/portfolio/Contact";
+import { ScrollBackground } from "@/components/portfolio/ScrollBackground";
+import { Reveal } from "@/components/portfolio/Reveal";
+
+export default function App() {
+  return (
+    <>
+      <main className="relative">
+        <ScrollBackground />
+        <Nav />
+        <Hero />
+        <Reveal><Stats /></Reveal>
+        <Reveal><About /></Reveal>
+        <Reveal><Skills /></Reveal>
+        <Reveal><Projects /></Reveal>
+        <Reveal><Certifications /></Reveal>
+        <Reveal><Testimonial /></Reveal>
+        <Reveal><Testimonials /></Reveal>
+        <Reveal><Contact /></Reveal>
+      </main>
+      <Toaster />
+    </>
+  );
+}

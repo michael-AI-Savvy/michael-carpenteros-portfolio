@@ -22,6 +22,7 @@ type Certification = {
   issuer: string;
   image: string;
   category: string;
+  description: string;
 };
 
 const certifications: Certification[] = [
@@ -34,6 +35,8 @@ const certifications: Certification[] = [
     issuer: "Udemy",
     image: certGoogleAi,
     category: "Generative AI",
+    description:
+      "Hands-on training with Google AI Studio to design generative AI apps, craft effective prompts, and produce text, image, and media outputs powered by Gemini models.",
   },
   {
     title: "Python Programming Mastery: From Beginner to Pro",
@@ -44,6 +47,8 @@ const certifications: Certification[] = [
     issuer: "Udemy",
     image: certPython,
     category: "Programming",
+    description:
+      "End-to-end Python journey covering core syntax, data structures, OOP, file handling, and real-world scripting — building a strong foundation for automation and AI development.",
   },
   {
     title: "Chatbot Development Course — Automate Sales & Support w/ AI",
@@ -54,6 +59,8 @@ const certifications: Certification[] = [
     issuer: "Udemy",
     image: certChatbot,
     category: "AI Automation",
+    description:
+      "Building AI-powered chatbots that automate sales conversations and customer support across messaging platforms, with practical flows, intents, and integrations.",
   },
   {
     title: "AI Digital Marketing: Master SEO, Ads & Sales",
@@ -64,6 +71,8 @@ const certifications: Certification[] = [
     issuer: "Udemy",
     image: certAiMarketing,
     category: "Marketing",
+    description:
+      "Applying AI tools to modern digital marketing — optimizing SEO, running smarter ad campaigns, and driving sales through data-informed content and targeting strategies.",
   },
   {
     title: "Advanced Supply Chain: Master Optimisation & AI Strategies",
@@ -74,6 +83,8 @@ const certifications: Certification[] = [
     issuer: "Udemy",
     image: certSupplyChain,
     category: "Strategy",
+    description:
+      "Advanced supply chain optimisation techniques combined with AI strategies for forecasting, logistics, and decision-making to improve efficiency and resilience.",
   },
 ];
 
@@ -110,7 +121,15 @@ export function Certifications() {
             >
               <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-primary/10 blur-2xl opacity-0 transition-opacity group-hover:opacity-100" />
               <div className="relative">
-                <div className="flex items-center justify-between">
+                <div className="overflow-hidden rounded-xl border border-border bg-background/40">
+                  <img
+                    src={cert.image}
+                    alt={`${cert.shortTitle} certificate`}
+                    className="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="mt-5 flex items-center justify-between">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
                     <Award className="h-5 w-5" />
                   </div>
@@ -118,9 +137,12 @@ export function Certifications() {
                     {cert.category}
                   </span>
                 </div>
-                <h3 className="mt-5 font-display text-lg font-semibold leading-snug text-foreground">
+                <h3 className="mt-4 font-display text-lg font-semibold leading-snug text-foreground">
                   {cert.shortTitle}
                 </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                  {cert.description}
+                </p>
                 <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1.5">
                     <Calendar className="h-3.5 w-3.5" />
@@ -153,8 +175,8 @@ export function Certifications() {
                 <DialogTitle className="mt-3 font-display text-2xl leading-tight">
                   {selected.title}
                 </DialogTitle>
-                <DialogDescription className="sr-only">
-                  Certificate details for {selected.shortTitle}
+                <DialogDescription className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {selected.description}
                 </DialogDescription>
               </DialogHeader>
 

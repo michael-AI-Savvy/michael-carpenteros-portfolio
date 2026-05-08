@@ -82,44 +82,46 @@ export function About() {
               Click any card to learn more.
             </p>
             <div className="mt-6 grid gap-5 sm:grid-cols-2">
-              {highlights.map(({ icon: Icon, title, desc, details }) => (
-                <Dialog key={title}>
-                  <DialogTrigger asChild>
-                    <button
-                      type="button"
-                      className="group relative overflow-hidden rounded-2xl border border-border bg-surface/40 p-6 text-left backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-surface-elevated/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                    >
-                      <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-primary/10 blur-2xl opacity-0 transition-opacity group-hover:opacity-100" />
-                      <div className="relative">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
+              {highlights.map(({ icon: Icon, title, desc, details }, i) => (
+                <Reveal key={title} delay={i * 120}>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button
+                        type="button"
+                        className="group relative w-full h-full overflow-hidden rounded-2xl border border-border bg-surface/40 p-6 text-left backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-surface-elevated/60 hover:shadow-[0_10px_40px_-10px_oklch(0.72_0.18_152/0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      >
+                        <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-primary/10 blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                        <div className="relative">
+                          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                            <Icon className="h-5 w-5" />
+                          </div>
+                          <h4 className="mt-4 font-display text-base font-semibold text-foreground">
+                            {title}
+                          </h4>
+                          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                            {desc}
+                          </p>
+                          <span className="mt-4 inline-block text-xs font-medium text-primary translate-x-0 opacity-70 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
+                            Click to learn more →
+                          </span>
+                        </div>
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-lg">
+                      <DialogHeader>
+                        <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
                           <Icon className="h-5 w-5" />
                         </div>
-                        <h4 className="mt-4 font-display text-base font-semibold text-foreground">
+                        <DialogTitle className="font-display text-xl">
                           {title}
-                        </h4>
-                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                          {desc}
-                        </p>
-                        <span className="mt-4 inline-block text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                          Learn more →
-                        </span>
-                      </div>
-                    </button>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-lg">
-                    <DialogHeader>
-                      <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <DialogTitle className="font-display text-xl">
-                        {title}
-                      </DialogTitle>
-                      <DialogDescription className="pt-2 text-base leading-relaxed text-muted-foreground">
-                        {details}
-                      </DialogDescription>
-                    </DialogHeader>
-                  </DialogContent>
-                </Dialog>
+                        </DialogTitle>
+                        <DialogDescription className="pt-2 text-base leading-relaxed text-muted-foreground">
+                          {details}
+                        </DialogDescription>
+                      </DialogHeader>
+                    </DialogContent>
+                  </Dialog>
+                </Reveal>
               ))}
             </div>
           </div>

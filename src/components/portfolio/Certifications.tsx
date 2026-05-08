@@ -121,7 +121,15 @@ export function Certifications() {
             >
               <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-primary/10 blur-2xl opacity-0 transition-opacity group-hover:opacity-100" />
               <div className="relative">
-                <div className="flex items-center justify-between">
+                <div className="overflow-hidden rounded-xl border border-border bg-background/40">
+                  <img
+                    src={cert.image}
+                    alt={`${cert.shortTitle} certificate`}
+                    className="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="mt-5 flex items-center justify-between">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
                     <Award className="h-5 w-5" />
                   </div>
@@ -129,9 +137,12 @@ export function Certifications() {
                     {cert.category}
                   </span>
                 </div>
-                <h3 className="mt-5 font-display text-lg font-semibold leading-snug text-foreground">
+                <h3 className="mt-4 font-display text-lg font-semibold leading-snug text-foreground">
                   {cert.shortTitle}
                 </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                  {cert.description}
+                </p>
                 <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1.5">
                     <Calendar className="h-3.5 w-3.5" />
@@ -164,8 +175,8 @@ export function Certifications() {
                 <DialogTitle className="mt-3 font-display text-2xl leading-tight">
                   {selected.title}
                 </DialogTitle>
-                <DialogDescription className="sr-only">
-                  Certificate details for {selected.shortTitle}
+                <DialogDescription className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {selected.description}
                 </DialogDescription>
               </DialogHeader>
 

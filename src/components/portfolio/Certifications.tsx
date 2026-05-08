@@ -22,6 +22,7 @@ type Certification = {
   issuer: string;
   image: string;
   category: string;
+  description: string;
 };
 
 const certifications: Certification[] = [

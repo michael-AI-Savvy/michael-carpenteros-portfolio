@@ -35,6 +35,8 @@ const certifications: Certification[] = [
     issuer: "Udemy",
     image: certGoogleAi,
     category: "Generative AI",
+    description:
+      "Hands-on training with Google AI Studio to design generative AI apps, craft effective prompts, and produce text, image, and media outputs powered by Gemini models.",
   },
   {
     title: "Python Programming Mastery: From Beginner to Pro",
@@ -45,6 +47,8 @@ const certifications: Certification[] = [
     issuer: "Udemy",
     image: certPython,
     category: "Programming",
+    description:
+      "End-to-end Python journey covering core syntax, data structures, OOP, file handling, and real-world scripting — building a strong foundation for automation and AI development.",
   },
   {
     title: "Chatbot Development Course — Automate Sales & Support w/ AI",
@@ -55,6 +59,8 @@ const certifications: Certification[] = [
     issuer: "Udemy",
     image: certChatbot,
     category: "AI Automation",
+    description:
+      "Building AI-powered chatbots that automate sales conversations and customer support across messaging platforms, with practical flows, intents, and integrations.",
   },
   {
     title: "AI Digital Marketing: Master SEO, Ads & Sales",
@@ -65,6 +71,8 @@ const certifications: Certification[] = [
     issuer: "Udemy",
     image: certAiMarketing,
     category: "Marketing",
+    description:
+      "Applying AI tools to modern digital marketing — optimizing SEO, running smarter ad campaigns, and driving sales through data-informed content and targeting strategies.",
   },
   {
     title: "Advanced Supply Chain: Master Optimisation & AI Strategies",
@@ -75,6 +83,8 @@ const certifications: Certification[] = [
     issuer: "Udemy",
     image: certSupplyChain,
     category: "Strategy",
+    description:
+      "Advanced supply chain optimisation techniques combined with AI strategies for forecasting, logistics, and decision-making to improve efficiency and resilience.",
   },
 ];
 

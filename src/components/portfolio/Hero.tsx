@@ -1,8 +1,44 @@
 import { Github, Linkedin, Mail, ArrowRight, Code2, Braces } from "lucide-react";
+import { useEffect, useState } from "react";
 import portrait from "@/assets/portrait.png";
 import portraitBg from "@/assets/portrait-bg.png";
 
+const ROLES = ["AI Automation", "CRM Specialist", "Workflow Engineer"];
+
+function useTypewriter(words: string[], typeSpeed = 70, deleteSpeed = 40, holdTime = 1400) {
+  const [text, setText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = words[wordIndex];
+    let timeout: ReturnType<typeof setTimeout>;
+
+    if (!deleting && text === current) {
+      timeout = setTimeout(() => setDeleting(true), holdTime);
+    } else if (deleting && text === "") {
+      setDeleting(false);
+      setWordIndex((i) => (i + 1) % words.length);
+    } else {
+      timeout = setTimeout(
+        () => {
+          setText(
+            deleting
+              ? current.substring(0, text.length - 1)
+              : current.substring(0, text.length + 1),
+          );
+        },
+        deleting ? deleteSpeed : typeSpeed,
+      );
+    }
+    return () => clearTimeout(timeout);
+  }, [text, deleting, wordIndex, words, typeSpeed, deleteSpeed, holdTime]);
+
+  return text;
+}
+
 export function Hero() {
+  const typed = useTypewriter(ROLES);
   return (
     <section className="relative min-h-screen overflow-hidden grid-pattern">
       {/* Glow orbs */}
@@ -13,8 +49,9 @@ export function Hero() {
         {/* Left content */}
         <div className="fade-in-up">
           <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-5 py-2 backdrop-blur-sm">
-            <span className="text-sm font-medium text-primary">
-              AI Automation | CRM Specialist | Workflow Engineer
+            <span className="text-sm font-medium text-primary inline-flex items-center min-h-5">
+              <span aria-live="polite">{typed}</span>
+              <span className="ml-0.5 inline-block h-4 w-[2px] bg-primary animate-pulse" aria-hidden="true" />
             </span>
           </div>
 

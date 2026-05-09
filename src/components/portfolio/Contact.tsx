@@ -151,6 +151,14 @@ export function Contact() {
                   href="https://www.linkedin.com/in/michael-carpenteros-4462b213a"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(
+                      "https://www.linkedin.com/in/michael-carpenteros-4462b213a",
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                  }}
                   className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
                 >
                   <div className="flex items-center gap-4">
@@ -173,6 +181,14 @@ export function Contact() {
                   href="https://github.com/michaelcarpenteros"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(
+                      "https://github.com/michaelcarpenteros",
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                  }}
                   className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
                 >
                   <div className="flex items-center gap-4">

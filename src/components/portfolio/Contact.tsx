@@ -169,7 +169,12 @@ export function Contact() {
                   <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
                 </a>
 
-                <div className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4">
+                <a
+                  href="https://github.com/michaelcarpenteros"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
+                >
                   <div className="flex items-center gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
                       <Github className="h-4 w-4" />
@@ -179,14 +184,12 @@ export function Contact() {
                         GitHub
                       </div>
                       <div className="truncate text-sm font-medium text-foreground">
-                        michaelcarpenteros-2b9c6d50
+                        @michaelcarpenteros
                       </div>
                     </div>
                   </div>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-                    Private
-                  </span>
-                </div>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-1" />
+                </a>
               </div>
             </div>
 

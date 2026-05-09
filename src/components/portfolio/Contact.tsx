@@ -156,13 +156,13 @@ export function Contact() {
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/in/michael-carpenteros-4462b213a"
+                  href="https://www.linkedin.com/in/michael-carpenteros-4462b213a/"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(
-                      "https://www.linkedin.com/in/michael-carpenteros-4462b213a",
+                      "https://www.linkedin.com/in/michael-carpenteros-4462b213a/",
                       "_blank",
                       "noopener,noreferrer",
                     );

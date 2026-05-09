@@ -129,6 +129,14 @@ export function Contact() {
               <div className="mt-8 space-y-3">
                 <a
                   href="mailto:michaelcarpenteros@gmail.com"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(
+                      "mailto:michaelcarpenteros@gmail.com",
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                  }}
                   className="group flex items-center justify-between rounded-xl border border-border bg-background/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
                 >
                   <div className="flex items-center gap-4">

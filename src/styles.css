@@ -125,7 +125,14 @@
     -webkit-font-smoothing: antialiased;
     background-image: var(--gradient-radial);
     background-attachment: fixed;
+    background-size: 200% 200%;
+    animation: bg-pan 24s ease-in-out infinite;
     min-height: 100vh;
+  }
+
+  @keyframes bg-pan {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
   }
 
   h1,

@@ -32,18 +32,35 @@ export function ScrollBackground() {
       className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
       style={{ filter: `hue-rotate(${hueShift}deg)` }}
     >
+      <div className="absolute inset-0 grid-pattern animate-grid-shift opacity-[0.07]" />
+
       <div
-        className="absolute -top-40 -left-40 h-[600px] w-[600px] rounded-full bg-primary/10 blur-3xl transition-transform duration-300 ease-out"
+        className="absolute -top-40 -left-40 h-[600px] w-[600px] transition-transform duration-300 ease-out"
         style={{ transform: `translate3d(0, ${orb1Y}px, 0)` }}
-      />
+      >
+        <div
+          className="h-full w-full rounded-full bg-primary/10 blur-3xl"
+          style={{ animation: "orb-drift-a 18s ease-in-out infinite" }}
+        />
+      </div>
       <div
-        className="absolute top-1/3 -right-40 h-[700px] w-[700px] rounded-full bg-primary/8 blur-3xl transition-transform duration-300 ease-out"
+        className="absolute top-1/3 -right-40 h-[700px] w-[700px] transition-transform duration-300 ease-out"
         style={{ transform: `translate3d(0, ${orb2Y}px, 0)` }}
-      />
+      >
+        <div
+          className="h-full w-full rounded-full bg-primary/10 blur-3xl"
+          style={{ animation: "orb-drift-b 22s ease-in-out infinite" }}
+        />
+      </div>
       <div
-        className="absolute bottom-0 left-1/3 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl transition-transform duration-300 ease-out"
+        className="absolute bottom-0 left-1/3 h-[500px] w-[500px] transition-transform duration-300 ease-out"
         style={{ transform: `translate3d(0, ${orb3Y}px, 0)` }}
-      />
+      >
+        <div
+          className="h-full w-full rounded-full bg-primary/10 blur-3xl"
+          style={{ animation: "orb-drift-c 26s ease-in-out infinite" }}
+        />
+      </div>
     </div>
   );
 }

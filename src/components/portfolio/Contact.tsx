@@ -199,13 +199,13 @@ export function Contact() {
                 </a>
 
                 <a
-                  href="https://github.com/michaelcarpenteros"
+                  href="https://wa.me/639154981984"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(
-                      "https://github.com/michaelcarpenteros",
+                      "https://wa.me/639154981984",
                       "_blank",
                       "noopener,noreferrer",
                     );
@@ -214,14 +214,14 @@ export function Contact() {
                 >
                   <div className="flex items-center gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                      <Github className="h-4 w-4" />
+                      <WhatsAppIcon className="h-4 w-4" />
                     </div>
                     <div className="min-w-0">
                       <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                        GitHub
+                        WhatsApp
                       </div>
                       <div className="truncate text-sm font-medium text-foreground">
-                        @michaelcarpenteros
+                        +639154981984
                       </div>
                     </div>
                   </div>
